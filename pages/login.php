@@ -51,14 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                 }
                 exit();
             } else {
-                echo '<div class="message error">Invalid email or password.</div>';
+                $errors[] = "Invalid email or password.";
             }
         } else {
-            echo '<div class="message error">Invalid email or password.</div>';
-        }
-    } else {
-        foreach ($errors as $error) {
-            echo '<div class="message error">' . htmlspecialchars($error) . '</div>';
+            $errors[] = "Invalid email or password.";
         }
     }
 }
@@ -73,6 +69,12 @@ include '../includes/header.php';
             <h1>Welcome Back</h1>
             <p>Sign in to your account</p>
         </div>
+
+        <?php if (!empty($errors)): ?>
+            <?php foreach ($errors as $error): ?>
+                <div class="message error"><?php echo htmlspecialchars($error); ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
         <!-- LOGIN FORM -->
         <form method="POST" action="">

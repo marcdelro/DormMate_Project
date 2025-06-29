@@ -79,18 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['signup'])) {
         $stmt->bindParam(':password', $hashed_password);
         
         if ($stmt->execute()) {
-            echo '<div class="message success">Account created successfully! Please login.</div>';
+            $success_message = "Account created successfully! Please login.";
             echo '<script>
                     setTimeout(function() {
                         window.location.href = "login.php";
                     }, 2000);
                   </script>';
         } else {
-            echo '<div class="message error">Something went wrong. Please try again.</div>';
-        }
-    } else {
-        foreach ($errors as $error) {
-            echo '<div class="message error">' . htmlspecialchars($error) . '</div>';
+            $errors[] = "Something went wrong. Please try again.";
         }
     }
 }
@@ -106,6 +102,16 @@ include '../includes/header.php';
             <h1>Create Account</h1>
             <p>Find the perfect dorm for you</p>
         </div>
+
+        <?php if (isset($success_message)): ?>
+            <div class="message success"><?php echo htmlspecialchars($success_message); ?></div>
+        <?php endif; ?>
+
+        <?php if (!empty($errors)): ?>
+            <?php foreach ($errors as $error): ?>
+                <div class="message error"><?php echo htmlspecialchars($error); ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
         <div id="form-error" class="message error" style="display: none;"></div>
 
