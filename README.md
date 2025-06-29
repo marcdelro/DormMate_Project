@@ -126,27 +126,57 @@ http://localhost/DormMate
 
 ```
 DormMate/
-├── index.php              # Main entry point (redirects to login)
-├── assets/
-│   ├── css/
-│   │   └── style.css      # Stylesheet
-│   └── js/
-│       └── main.js        # JavaScript functionality
-├── config/
-│   └── database.php       # Database connection class
-├── includes/
-│   ├── header.php         # Common header
-│   └── footer.php         # Common footer
-├── pages/
-│   ├── config.php         # Page configuration
-│   ├── login.php          # Login page
-│   ├── logout.php         # Logout functionality
-│   ├── signup.php         # Registration page
-│   └── user_dashboard.php # User dashboard
-├── sql/
-│   └── user_system.sql    # Database structure
-└── README.md              # This file
+├── index.php                    # Main entry point (redirects to login)
+├── README.md                    # Project documentation
+├── .git/                        # Git version control
+├── assets/                      # Static assets
+│   ├── css/                     # Stylesheets
+│   │   ├── README.md           # CSS documentation
+│   │   ├── animations.css      # CSS animations and transitions
+│   │   ├── auth-branding.css   # Authentication page branding
+│   │   ├── base.css           # Base styles and resets
+│   │   ├── dashboard.css      # Dashboard-specific styles
+│   │   ├── forms.css          # Form styling and validation
+│   │   ├── messages.css       # Message/notification styles
+│   │   ├── responsiveness.css # Responsive design rules
+│   │   ├── signup.css         # Signup page specific styles
+│   │   └── split_layout.css   # Split-screen layout system
+│   ├── images/                 # Image assets
+│   │   └── README.md          # Image usage documentation
+│   └── js/                     # JavaScript files
+│       └── main.js            # Main JavaScript functionality
+├── config/                     # Configuration files
+│   └── database.php           # Database connection class
+├── includes/                   # Reusable PHP components
+│   ├── header.php             # Common header with CSS/JS includes
+│   └── footer.php             # Common footer
+├── pages/                      # Application pages
+│   ├── login.php              # User login page
+│   ├── logout.php             # Logout functionality
+│   ├── signup.php             # User registration page
+│   └── user_dashboard.php     # User dashboard
+├── sql/                        # Database files
+│   ├── user_system.sql        # Main database structure
+│   └── Units_System           # Additional database components
+└── src/                        # Source code (future development)
 ```
+
+### 📂 Directory Descriptions
+
+**`assets/`** - Contains all static files (CSS, JavaScript, images)
+- **`css/`** - Modular CSS architecture with separate files for different components
+- **`js/`** - JavaScript files for client-side functionality
+- **`images/`** - Image assets for the application
+
+**`config/`** - Configuration files for database and application settings
+
+**`includes/`** - Reusable PHP components included across multiple pages
+
+**`pages/`** - Main application pages for user interaction
+
+**`sql/`** - Database schema and related SQL files
+
+**`src/`** - Reserved for additional source code and future development
 
 ## 💡 Usage
 
