@@ -214,5 +214,3 @@ Modify breakpoints in `responsiveness.css`:
 
 ---
 
-**Need help?** Check the main project README.md for setup instructions and troubleshooting.
-
