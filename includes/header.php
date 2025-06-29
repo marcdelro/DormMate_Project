@@ -7,4 +7,4 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/main.js" defer></script>
 </head>
-<body></body>
+<body class="<?php echo isset($body_class) ? $body_class : ''; ?>"></body>

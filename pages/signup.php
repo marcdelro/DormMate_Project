@@ -91,16 +91,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['signup'])) {
     }
 }
 
-$page_title = "Sign Up - User Authentication System";
+$page_title = "Sign Up - DormMate";
+$body_class = "auth-page signup-page";
 include '../includes/header.php';
 ?>
 
-<!--  HTML form -->
 <div class="container">
     <div id="signup-form" class="form-container active">
         <div class="header">
             <h1>Create Account</h1>
-            <p>Find the perfect dorm for you</p>
+            <p>Join our student community</p>
         </div>
 
         <?php if (isset($success_message)): ?>
@@ -113,14 +113,18 @@ include '../includes/header.php';
             <?php endforeach; ?>
         <?php endif; ?>
 
-        <div id="form-error" class="message error" style="display: none;"></div>
-
         <form method="POST" action="" class="compact-form">
             <div class="form-row">
                 <div class="form-group">
                     <label for="first_name">First Name</label>
                     <input type="text" id="first_name" name="first_name" 
                            value="<?php echo isset($_POST['first_name']) ? htmlspecialchars($_POST['first_name']) : ''; ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="middle_name">Middle Name</label>
+                    <input type="text" id="middle_name" name="middle_name" 
+                           value="<?php echo isset($_POST['middle_name']) ? htmlspecialchars($_POST['middle_name']) : ''; ?>">
                 </div>
 
                 <div class="form-group">
@@ -132,9 +136,9 @@ include '../includes/header.php';
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="middle_name">Middle Name</label>
-                    <input type="text" id="middle_name" name="middle_name" 
-                           value="<?php echo isset($_POST['middle_name']) ? htmlspecialchars($_POST['middle_name']) : ''; ?>">
+                    <label for="birthday">Birthday</label>
+                    <input type="date" id="birthday" name="birthday" 
+                        value="<?php echo isset($_POST['birthday']) ? htmlspecialchars($_POST['birthday']) : ''; ?>" required>
                 </div>
 
                 <div class="form-group">
@@ -142,12 +146,6 @@ include '../includes/header.php';
                     <input type="tel" id="contact_number" name="contact_number" 
                            value="<?php echo isset($_POST['contact_number']) ? htmlspecialchars($_POST['contact_number']) : ''; ?>">
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="birthday">Birthday</label>
-                <input type="date" id="birthday" name="birthday" 
-                    value="<?php echo isset($_POST['birthday']) ? htmlspecialchars($_POST['birthday']) : ''; ?>" required>
             </div>
 
             <div class="form-group">

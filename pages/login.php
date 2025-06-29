@@ -59,40 +59,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     }
 }
 
-$page_title = "Login - User Authentication System";
+$page_title = "Login - DormMate";
+$body_class = "split-layout";
 include '../includes/header.php';
 ?>
 
-<div class="container">
-    <div id="login-form" class="form-container active">
-        <div class="header">
-            <h1>Welcome Back</h1>
-            <p>Sign in to your account</p>
+<div class="auth-container">
+    <!-- Left Side - Branding -->
+    <div class="auth-branding">
+        <div class="brand-content">
+            <div class="brand-logo">DormMate</div>
+            <div class="brand-tagline">Find Your Perfect Home Away From Home</div>
+            <ul class="brand-features">
+                <li>Verified Dormitory Listings</li>
+                <li>Secure Application Process</li>
+                <li>24/7 Support System</li>
+                <li>Student Community Platform</li>
+            </ul>
         </div>
+    </div>
 
-        <?php if (!empty($errors)): ?>
-            <?php foreach ($errors as $error): ?>
-                <div class="message error"><?php echo htmlspecialchars($error); ?></div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+    <!-- Right Side - Login Form -->
+    <div class="auth-form-section">
+        <div class="auth-form-wrapper">
+            <div class="form-container active">
+                <div class="header">
+                    <h1>Welcome Back</h1>
+                    <p>Sign in to your account</p>
+                </div>
 
-        <!-- LOGIN FORM -->
-        <form method="POST" action="">
-            <div class="form-group">
-                <label for="login_email">Email Address</label>
-                <input type="email" id="login_email" name="login_email" required>
+                <?php if (!empty($errors)): ?>
+                    <?php foreach ($errors as $error): ?>
+                        <div class="message error"><?php echo htmlspecialchars($error); ?></div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <!-- LOGIN FORM -->
+                <form method="POST" action="">
+                    <div class="form-group">
+                        <label for="login_email">Email Address</label>
+                        <input type="email" id="login_email" name="login_email" 
+                               value="<?php echo isset($_POST['login_email']) ? htmlspecialchars($_POST['login_email']) : ''; ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login_password">Password</label>
+                        <input type="password" id="login_password" name="login_password" required>
+                    </div>
+                    
+                    <button type="submit" name="login" class="btn">Sign In</button>
+                </form>
+                
+                <div class="toggle-form">
+                    Don't have an account? <a href="signup.php">Create Account</a>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="login_password">Password</label>
-                <input type="password" id="login_password" name="login_password" required>
-            </div>
-            
-            <button type="submit" name="login" class="btn">Sign In</button>
-        </form>
-        
-        <div class="toggle-form">
-            Don't have an account? <a href="signup.php">Create Account</a>
         </div>
     </div>
 </div>
