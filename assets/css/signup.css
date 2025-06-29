@@ -1,0 +1,42 @@
+/* ========== SIGNUP PAGE BACKGROUND ========== */
+body.signup-page {
+    background: linear-gradient(-180deg, rgba(102, 210, 234, 0.9), #0f2c48, rgba(231, 235, 236, 0.9), rgba(7, 49, 59, 0.9)),
+        url('https://www.aurecongroup.com/-/media/images/aurecon/content/insights/tall-buildings-past-present/tall-buildings-past-present-hero-banner.jpg?as=0&w=824') center/cover;
+    background-size: 200% 400%;
+    animation: gradientShift 55s ease infinite;
+    position: relative;
+    /* Ensure signup page uses centered layout, not split layout */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 100vh !important;
+    padding: 20px !important;
+}
+
+/* Ensure signup page container is centered and not affected by split layout */
+body.signup-page .container {
+    /* Override any conflicting layout styles */
+    position: relative;
+    z-index: 1;
+    margin: 0 auto !important;
+    /* Reset any potential flex or positioning issues */
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    /* Clean white background without glassmorphism */
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Hide auth-container if it exists on signup page */
+body.signup-page .auth-container {
+    display: none;
+}
+
+/* Hide auth-branding and auth-form-section on signup page */
+body.signup-page .auth-branding,
+body.signup-page .auth-form-section {
+    display: none;
+}

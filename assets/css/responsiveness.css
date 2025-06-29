@@ -1,0 +1,17 @@
+/* Responsive adjustments for 3-field rows */
+@media (max-width: 768px) {
+    .form-row:has(.form-group:nth-child(3)),
+    .form-row.three-fields {
+        flex-direction: column;
+    }
+    
+    .form-row:has(.form-group:nth-child(3)) .form-group,
+    .form-row.three-fields .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-row:has(.form-group:nth-child(3)) .form-group:last-child,
+    .form-row.three-fields .form-group:last-child {
+        margin-bottom: 0;
+    }
+}
