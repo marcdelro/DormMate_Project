@@ -225,6 +225,3 @@ sudo chmod -R 755 /Applications/XAMPP/xamppfiles/htdocs/DormMate/
 This project is open source and available under the [MIT License](LICENSE).
 
 ---
-
-**Need Help?** 
-If you encounter any issues during setup, please check the troubleshooting section above or create an issue in the project repository.
