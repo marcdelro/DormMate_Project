@@ -1,0 +1,73 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1 
+-- Generation Time: Jun 29, 2025 at 03:41 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `unitsdb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `units`
+--
+
+CREATE TABLE `units` (
+  `unit_id` int(11) NOT NULL,
+  `unit_type` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `is_reserved` tinyint(1) DEFAULT 0,
+  `description` text DEFAULT NULL,
+  `photo_path` varchar(255) DEFAULT NULL,
+  `size` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`unit_id`, `unit_type`, `price`, `is_reserved`, `description`, `photo_path`, `size`) VALUES
+(1, 'Single Room', 5000.00, 1, 'Cozy room with private bathroom', 'images/Dr1.jpg', '40'),
+(2, 'Double Room', 3500.00, 0, 'Shared room with two beds and common bath', 'images/Dr2.jpg', '70'),
+(3, 'Studio Unit', 7300.00, 0, 'Studio type with kitchenette and own bath', 'images/Dr3.jpg', '100'),
+(4, 'Single Room', 4000.00, 0, 'Simple unfurnished room', 'images/Dr4.jpg', '30');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
+  ADD PRIMARY KEY (`unit_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
