@@ -10,111 +10,133 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    <!-- Link main CSS -->
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
+    <title>DormMate Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Dashboard.css"> <!-- External CSS -->
 </head>
-<body class="dashboard">
+<body>
 
-    <div class="dashboard-header clearfix">
-        <h1>Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h1>
-        <a href="logout.php" class="logout-btn">Logout</a>
-    </div>
+<!-- Navigation Bar -->
+<div class="top-navbar">
+    <h2 class="logo">📦 DormMate</h2>
+   <div class="nav-links">
+    <a href="ViewUnits.php" class="active">🏠 Dashboard</a>
+    <a href="#">🛏️ View Units</a>
+    <a href="#">📝 Make Reservation</a>
+    <a href="#">📂 Manage Bookings</a>
+    <a href="about.php">ℹ️ About Us</a>
+    <a href="#">🚪 Logout</a>
+</div>
+</div>
 
-    <div class="dashboard-content<?php echo isset($_SESSION['success']) ? ' blurred' : ''; ?>">
-        <h2>User Dashboard</h2>
-        <p>This is your user dashboard.</p>
-        <!-- Add more features below -->
 
-        <a href="reservation_page.php" class="btn make-reservation-btn">Make a Reservation</a>
-        
-    </div>
+<div class="unit-controls">
+    <select id="filterType">
+        <option value="all">All Types</option>
+        <option value="Single Room">Single Room</option>
+        <option value="Double Room">Double Room</option>
+        <option value="Studio Unit">Studio Unit</option>
+    </select>
+    <label class="available-toggle">
+        <input type="checkbox" id="showAvailableOnly">
+        Show Available Only
+    </label>
+    <button id="resetFilters">🔄 Reset Filters</button>
+</div>
 
-    <?php if (isset($_SESSION['success'])): ?>
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <p><?php echo htmlspecialchars($_SESSION['success']); ?></p>
+
+
+
+<!-- Scrollable Unit Cards -->
+<div class="unit-container">
+<?php
+include 'DBConnector.php';
+
+$sql = "SELECT * FROM units";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0):
+    while ($row = $result->fetch_assoc()):
+        $isReserved = $row['is_reserved'];
+        $statusClass = $isReserved ? "occupied" : "available";
+        $statusText = $isReserved ? "OCCUPIED" : "AVAILABLE";
+?>
+    <div class="unit-card <?= $statusClass ?>">
+        <img class="unit-image" src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Unit Photo">
+        <div class="unit-details">
+            <h2><?= htmlspecialchars($row['unit_type']) ?></h2>
+            <span class="status"><?= $statusText ?></span>
+            <p><strong>Price:</strong> ₱<?= number_format($row['price'], 2) ?></p>
+            <p><strong>Size:</strong> <?= htmlspecialchars($row['size']) ?> sqm</p>
+            <p><?= htmlspecialchars($row['description']) ?></p>
+            <?php if (!$isReserved): ?>
+                <a href="UnitDetails.php?id=<?= $row['id'] ?>">
+                    <button class="reserve-btn">View Details</button>
+                </a>
+            <?php else: ?>
+                <button class="reserve-btn" disabled>Not Available</button>
+            <?php endif; ?>
         </div>
     </div>
-    <?php unset($_SESSION['success']); ?>
-    <?php endif; ?>
+<?php
+    endwhile;
+else:
+    echo "<p style='margin-left:20px;'>No units found.</p>";
+endif;
 
-    <style>
-        /* Modal container */
-        .modal {
-            display: block;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
+$conn->close();
+?>
+</div> <!-- end unit-container -->
+
+<script>
+    const filterType = document.getElementById('filterType');
+    const showAvailableOnly = document.getElementById('showAvailableOnly');
+    const unitCards = Array.from(document.querySelectorAll('.unit-card'));
+
+    function updateUnits() {
+        const selectedType = filterType.value;
+        const onlyAvailable = showAvailableOnly.checked;
+
+        let filtered = [...unitCards];
+
+        // Filter by unit type
+        if (selectedType !== 'all') {
+            filtered = filtered.filter(card =>
+                card.querySelector('h2').innerText === selectedType
+            );
         }
 
-        /* Modal content box */
-        .modal-content {
-            background-color: #d4edda;
-            color: #155724;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 400px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            font-weight: 600;
-            font-size: 16px;
-            text-align: center;
-            position: relative;
+        // Filter by availability
+        if (onlyAvailable) {
+            filtered = filtered.filter(card =>
+                card.classList.contains('available')
+            );
         }
 
-        /* Close button */
-        .close {
-            color: #155724;
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        // Hide all first
+        unitCards.forEach(card => card.style.display = 'none');
 
-        /* Blur effect on background */
-        .blurred {
-            filter: blur(3px);
-            pointer-events: none;
-            user-select: none;
-        }
-    </style>
+        // Show filtered cards
+        filtered.forEach(card => card.style.display = 'flex');
+    }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var modal = document.getElementById('successModal');
-            var closeBtn = document.getElementById('closeModal');
-            var content = document.querySelector('.dashboard-content');
+    // Event listeners
+    filterType.addEventListener('change', updateUnits);
+    showAvailableOnly.addEventListener('change', updateUnits);
 
-            closeBtn.onclick = function () {
-                modal.style.display = 'none';
-                content.classList.remove('blurred');
-            };
+    // ✅ Reset filter logic
+    document.getElementById('resetFilters').addEventListener('click', () => {
+        filterType.value = 'all';
+        showAvailableOnly.checked = false;
+        updateUnits();
+    });
+</script>
 
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                    content.classList.remove('blurred');
-                }
-            };
-        });
-    </script>
+
+
 
 </body>
+
 </html>
