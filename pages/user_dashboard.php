@@ -17,25 +17,38 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <!-- Link main CSS -->
-    <link rel="stylesheet" href="../assets/css/Dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Navigation Bar -->
 <div class="top-navbar">
-    <h2 class="logo">📦 DormMate</h2>
-   <div class="nav-links">
-    <a href="ViewUnits.php" class="active">🏠 Dashboard</a>
-    <a href="#">🛏️ View Units</a>
-    <a href="#">📝 Make Reservation</a>
-    <a href="#">📂 Manage Bookings</a>
-    <a href="about.php">ℹ️ About Us</a>
-    <a href="logout.php" onclick="return confirmLogout()">🚪 Logout</a>
-</div>
+    <div class="navbar-left">
+        <h1 class="logo">DormMate</h1>
+        <span class="user-badge">👤 USER</span>
+    </div>
+    <div class="navbar-center">
+        <div class="nav-links">
+            <a href="#" class="nav-link active">Dashboard</a>
+            <a href="#" class="nav-link">View Units</a>
+            <a href="#" class="nav-link">Reservations</a>
+            <a href="#" class="nav-link">My Bookings</a>
+        </div>
+    </div>
+    <div class="navbar-right">
+        <div class="user-greeting">
+            <span class="greeting-text">Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
+        </div>
+        <a href="logout.php" onclick="return confirmLogout()" class="logout-btn">Logout</a>
+    </div>
 </div>
 
 
 <div class="unit-controls">
+    <h3>🔍 Find Your Perfect Room</h3>
     <select id="filterType">
         <option value="all">All Types</option>
         <option value="Single Room">Single Room</option>
@@ -55,19 +68,27 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
 <!-- Scrollable Unit Cards -->
 <div class="unit-container">
 <?php
-include '../config/DBConnector.php';
+try {
+    include '../config/DBConnector.php';
 
-$sql = "SELECT * FROM units";
-$result = $conn->query($sql);
+    $sql = "SELECT * FROM units";
+    $result = $conn->query($sql);
 
-if ($result->num_rows > 0):
-    while ($row = $result->fetch_assoc()):
-        $isReserved = $row['is_reserved'];
-        $statusClass = $isReserved ? "occupied" : "available";
-        $statusText = $isReserved ? "OCCUPIED" : "AVAILABLE";
+    if (!$result) {
+        echo "<div style='background: #f8d7da; color: #721c24; padding: 20px; border-radius: 8px; margin: 20px; text-align: center;'>";
+        echo "<h3>⚠️ Database Error</h3>";
+        echo "<p>Error: " . $conn->error . "</p>";
+        echo "<p><a href='../setup_units.php' style='color: #721c24;'>Click here to setup units table</a></p>";
+        echo "</div>";
+    } else if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()):
+            $isReserved = $row['is_reserved'];
+            $statusClass = $isReserved ? "occupied" : "available";
+            $statusText = $isReserved ? "OCCUPIED" : "AVAILABLE";
 ?>
     <div class="unit-card <?= $statusClass ?>">
-        <img class="unit-image" src="<?= htmlspecialchars($row['photo_path']) ?>" alt="Unit Photo">
+        <img class="unit-image" src="../<?= htmlspecialchars($row['photo_path']) ?>" alt="Unit Photo" 
+             onerror="this.src='../assets/images/placeholder.jpg'">
         <div class="unit-details">
             <h2><?= htmlspecialchars($row['unit_type']) ?></h2>
             <span class="status"><?= $statusText ?></span>
@@ -84,12 +105,23 @@ if ($result->num_rows > 0):
         </div>
     </div>
 <?php
-    endwhile;
-else:
-    echo "<p style='margin-left:20px;'>No units found.</p>";
-endif;
-
-$conn->close();
+        endwhile;
+    } else {
+        echo "<div style='background: #fff3cd; color: #856404; padding: 20px; border-radius: 8px; margin: 20px; text-align: center;'>";
+        echo "<h3>📦 No Units Available</h3>";
+        echo "<p>No dormitory units found in the database.</p>";
+        echo "<p><a href='../setup_units.php' style='color: #856404;'>Click here to add sample units</a></p>";
+        echo "</div>";
+    }
+    
+    $conn->close();
+} catch (Exception $e) {
+    echo "<div style='background: #f8d7da; color: #721c24; padding: 20px; border-radius: 8px; margin: 20px; text-align: center;'>";
+    echo "<h3>⚠️ Connection Error</h3>";
+    echo "<p>Could not connect to database: " . $e->getMessage() . "</p>";
+    echo "<p><a href='../setup_units.php' style='color: #721c24;'>Click here to setup database</a></p>";
+    echo "</div>";
+}
 ?>
 </div> <!-- end unit-container -->
 

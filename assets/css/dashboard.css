@@ -7,9 +7,17 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #fdf6ee;
-    padding-top: 80px; /* space for top navbar */
-    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding-top: 110px; /* space for top navbar */
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Fix overflow for admin dashboard */
+body.dashboard.admin-dashboard {
+    overflow: auto !important;
+    padding-top: 0 !important;
+    background: linear-gradient(-180deg,#0f2c48 0%, #e3f1f3 100%);
 }
 
 /* Top Navigation Bar */
@@ -18,47 +26,119 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 90px;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    height: 100px;
+    background: linear-gradient(135deg, #0f2c48 0%, #1e3a5f 100%);
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px;
+    padding: 15px 30px;
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideInDown 0.6s ease-out;
+}
+
+.navbar-left {
+    flex: 0 0 260px; /* Fixed width for logo and badge */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Horizontal gap between logo and badge */
+    padding-right: 20px;
+}
+
+.navbar-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    margin-left: 20px; /* Reduced margin since left section is wider */
+}
+
+.navbar-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 .logo {
-    font-size: 20px;
+    font-size: 22px; /* Slightly larger logo */
     font-weight: 600;
     letter-spacing: 1px;
+    margin: 0;
 }
 
 .nav-links {
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
-.nav-links a {
+.nav-link {
     text-decoration: none;
-    color: white;
-    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
     font-weight: 500;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background 0.2s;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.nav-links a:hover {
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link.active {
     background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.nav-links a.active {
-    background-color: rgba(255, 255, 255, 0.25);
-    font-weight: 600;
-    border-bottom: 2px solid white;
-    border-radius: 6px;
+.user-greeting {
+    display: flex;
+    align-items: center;
+    animation: fadeInRight 0.8s ease-out 0.3s both;
+}
+
+.greeting-text {
+    font-size: 15px; /* Slightly larger greeting text */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.user-badge {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    padding: 6px 12px; /* Slightly larger padding for better visibility */
+    border-radius: 15px;
+    font-size: 0.75em; /* Slightly larger font */
+    font-weight: bold;
+    animation: pulse-online 2s infinite;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.logout-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .unit-container {
@@ -67,6 +147,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 20px;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 
 /* Unit Cards */
@@ -167,10 +248,25 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
-    max-width: 1000px;
-    margin: 0 auto 20px;
-    padding: 10px 20px;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.unit-controls h3 {
+    width: 100%;
+    text-align: center;
+    color: #0f2c48;
+    margin-bottom: 15px;
+    font-size: 1.2em;
 }
 
 .unit-controls select,
@@ -178,23 +274,25 @@ body {
 .unit-controls label {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 /* Dropdown */
 .unit-controls select {
     background: white;
     color: #333;
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 2px solid #e1e5e9;
+    padding: 12px 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-width: 150px;
 }
 
 .unit-controls select:focus {
     outline: none;
-    border-color: #6a11cb;
-    box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.3);
+    border-color: #0f2c48;
+    box-shadow: 0 0 0 3px rgba(15, 44, 72, 0.1);
+    transform: translateY(-2px);
 }
 
 /* Checkbox toggle */
@@ -204,108 +302,76 @@ body {
     gap: 8px;
     color: #333;
     background: white;
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 2px solid #e1e5e9;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.available-toggle:hover {
+    border-color: #0f2c48;
+    transform: translateY(-2px);
 }
 
 .available-toggle input[type="checkbox"] {
-    transform: scale(1.1);
-    accent-color: #2575fc;
+    transform: scale(1.2);
+    accent-color: #0f2c48;
 }
 
 /* Reset Button */
 #resetFilters {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #0f2c48 0%, #1e3a5f 100%);
     color: white;
     border: none;
-    padding: 8px 14px;
-    font-weight: 500;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 12px 20px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(15, 44, 72, 0.3);
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 #resetFilters:hover {
-    background: linear-gradient(to right, #5311a5, #1b60ea);
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f2c48 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(15, 44, 72, 0.4);
 }
 
 /* ========== ADMIN DASHBOARD STYLES ========== */
 .admin-dashboard {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(-180deg,#0f2c48 0%, #e3f1f3 100%);
     min-height: 100vh;
+    overflow-y: auto; /* Allow vertical scrolling */
+    padding: 20px;
+    padding-top: 120px; /* Space for the top navbar */
 }
 
-.admin-dashboard .dashboard-header {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px 30px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+/* Override body overflow for admin dashboard */
+.admin-dashboard body,
+body.admin-dashboard {
+    overflow: auto !important;
+    padding-top: 120px !important; /* Match the navbar height */
+    background: linear-gradient(-180deg,#0f2c48 0%, #e3f1f3 100%);
 }
 
-.admin-dashboard .dashboard-header h1 {
-    color: white;
-    font-size: 1.8em;
-    font-weight: 600;
+body.dashboard.admin-dashboard {
+    overflow-y: auto !important;
+    padding-top: 120px !important;
+    height: auto !important;
+    min-height: 100vh;
 }
 
 .admin-badge {
     background: linear-gradient(45deg, #FFD700, #FFA500);
     color: #333;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.7em;
-    font-weight: bold;
-    margin-left: 10px;
-    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
-}
-
-.admin-dashboard .logout-btn {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.admin-dashboard .logout-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.admin-dashboard .dashboard-navbar {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    padding: 6px 12px; /* Same padding as user badge */
     border-radius: 15px;
-    margin-bottom: 20px;
-    padding: 15px 20px;
-}
-
-.admin-dashboard .nav-brand {
-    color: white;
-    font-size: 1.2em;
+    font-size: 0.75em; /* Same size as user badge */
     font-weight: bold;
-}
-
-.admin-dashboard .nav-links .nav-link {
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.admin-dashboard .nav-links .nav-link:hover,
-.admin-dashboard .nav-links .nav-link.active {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    transform: translateY(-2px);
+    animation: pulse-admin 2s infinite;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .admin-dashboard .dashboard-content {
@@ -314,6 +380,8 @@ body {
     padding: 30px;
     margin: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    max-height: none; /* Remove any height restrictions */
+    overflow: visible; /* Ensure content is visible */
 }
 
 .admin-dashboard .dashboard-content h2 {
@@ -435,106 +503,85 @@ body {
     padding-bottom: 10px;
 }
 
-.users-grid {
+.users-list {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+.users-list-header {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.user-card {
+    grid-template-columns: 60px 1fr 1fr 120px 120px;
     background: #f8f9fa;
-    border-radius: 12px;
     padding: 15px;
-    display: flex;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.user-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 1fr 120px 120px;
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    transition: all 0.2s ease;
     align-items: center;
-    gap: 15px;
-    transition: all 0.3s ease;
-    border-left: 4px solid #dee2e6;
-    position: relative;
 }
 
-.user-card:hover {
-    background: #e9ecef;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.user-row:hover {
+    background: #f8f9fa;
+    transform: translateX(5px);
 }
 
-.user-card.admin {
-    border-left-color: #dc3545;
-    background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+.user-row:last-child {
+    border-bottom: none;
 }
 
-.user-card.user {
-    border-left-color: #28a745;
-    background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+.user-row.current-user {
+    background: linear-gradient(90deg, #e3f2fd 0%, #f3e5f5 100%);
+    border-left: 4px solid #2196f3;
 }
 
-.user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, #667eea, #764ba2);
+.user-row.admin {
+    background: linear-gradient(90deg, #ffebee 0%, #fce4ec 100%);
+    border-left: 4px solid #f44336;
+}
+
+.user-row.admin:hover {
+    background: linear-gradient(90deg, #ffcdd2 0%, #f8bbd9 100%);
+}
+
+.col-status {
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 1.5em;
-    color: white;
-    font-weight: bold;
+    align-items: center;
 }
 
-.user-info {
-    flex: 1;
-}
-
-.user-name {
+.col-name {
     font-weight: 600;
     color: #2c3e50;
-    font-size: 1.1em;
-    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.user-email {
+.col-email {
     color: #666;
     font-size: 0.9em;
-    margin-bottom: 8px;
 }
 
-.user-meta {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
+.col-role {
+    text-align: center;
 }
 
-.user-role-badge {
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.7em;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.user-role-badge.admin {
-    background: #dc3545;
-    color: white;
-}
-
-.user-role-badge.user {
-    background: #28a745;
-    color: white;
-}
-
-.user-joined {
-    font-size: 0.75em;
+.col-joined {
     color: #999;
-}
-
-.user-status {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    font-size: 0.85em;
+    text-align: center;
 }
 
 .status-indicator {
@@ -555,15 +602,208 @@ body {
 }
 
 @keyframes pulse-online {
-    0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
 }
 
-.user-status small {
+/* Admin badge gets golden pulse */
+.admin-badge {
+    animation: pulse-admin 2s infinite;
+}
+
+@keyframes pulse-admin {
+    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+.role-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
     font-size: 0.7em;
-    color: #666;
-    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.role-badge.admin {
+    background: #dc3545;
+    color: white;
+}
+
+.role-badge.user {
+    background: #28a745;
+    color: white;
+}
+
+.you-badge {
+    background: #007bff;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 0.6em;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+/* Responsive design for user dashboard navbar */
+@media (max-width: 1024px) {
+    .navbar-center {
+        margin-left: 15px; /* Reduce margin on medium screens */
+    }
+    
+    .navbar-left {
+        flex: 0 0 220px; /* Slightly smaller on medium screens */
+        padding-right: 15px;
+        gap: 12px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-link {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    .greeting-text {
+        font-size: 14px;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .user-badge {
+        font-size: 0.7em;
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-navbar {
+        padding: 0 15px;
+        height: 100px; /* Increased height to accommodate stacked layout */
+        flex-wrap: wrap;
+    }
+    
+    body {
+        padding-top: 100px;
+    }
+    
+    .navbar-left {
+        flex: 0 0 auto;
+        gap: 8px;
+        padding-right: 10px;
+    }
+    
+    .navbar-center {
+        order: 3;
+        flex: 1 1 100%;
+        margin-top: 10px;
+    }
+    
+    .navbar-right {
+        flex: 0 0 auto;
+    }
+    
+    .nav-links {
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+    
+    .logo {
+        font-size: 18px;
+    }
+    
+    .greeting-text {
+        font-size: 12px;
+    }
+    
+    .user-badge {
+        font-size: 0.6em;
+    }
+    
+    .logout-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .unit-controls {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+        margin: 20px auto;
+    }
+    
+    .unit-controls select,
+    .unit-controls .available-toggle,
+    .unit-controls button {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .unit-container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .unit-card {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-navbar {
+        height: 120px; /* Taller to accommodate wrapped content */
+    }
+    
+    body {
+        padding-top: 120px;
+    }
+    
+    .navbar-left {
+        gap: 2px;
+    }
+    
+    .navbar-center {
+        margin-top: 15px;
+    }
+    
+    .nav-links {
+        gap: 8px;
+    }
+    
+    .nav-link {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+    
+    .logo {
+        font-size: 16px;
+    }
+    
+    .greeting-text {
+        font-size: 11px;
+    }
+    
+    .user-badge {
+        padding: 3px 8px;
+        font-size: 0.5em;
+    }
+    
+    .unit-controls {
+        margin: 15px auto;
+        padding: 12px 15px;
+    }
 }
 
 /* Quick Actions - Simplified */
@@ -599,3 +839,58 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* Page load animations */
+.top-navbar {
+    animation: slideInDown 0.6s ease-out;
+}
+
+.unit-controls {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.unit-container {
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Staggered animation for unit cards */
+.unit-card:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.1s both; }
+.unit-card:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.2s both; }
+.unit-card:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.3s both; }
+.unit-card:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.4s both; }
+.unit-card:nth-child(5) { animation: fadeInUp 0.6s ease-out 0.5s both; }
+.unit-card:nth-child(6) { animation: fadeInUp 0.6s ease-out 0.6s both; }
+.unit-card:nth-child(n+7) { animation: fadeInUp 0.6s ease-out 0.7s both; }
