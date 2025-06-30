@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Test</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/signup.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <style>
+        .test-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .test-element {
+            opacity: 0;
+            padding: 10px;
+            margin: 10px 0;
+            background: #f0f0f0;
+            border-radius: 4px;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+        
+        .test-element:nth-child(2) { animation-delay: 0.2s; }
+        .test-element:nth-child(3) { animation-delay: 0.4s; }
+        .test-element:nth-child(4) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="auth-page signup-page">
+    <div class="test-container">
+        <h2>Animation Test</h2>
+        <div class="test-element">Element 1 - Should slide in first</div>
+        <div class="test-element">Element 2 - Should slide in second</div>
+        <div class="test-element">Element 3 - Should slide in third</div>
+        <div class="test-element">Element 4 - Should slide in fourth</div>
+    </div>
+    
+    <script>
+        console.log('Animation test loaded');
+        console.log('Body classes:', document.body.className);
+        
+        // Test if slideInUp animation is working
+        setTimeout(() => {
+            console.log('Testing manual animation trigger...');
+            const elements = document.querySelectorAll('.test-element');
+            elements.forEach((el, i) => {
+                const computed = getComputedStyle(el);
+                console.log(`Element ${i+1} animation:`, computed.animation);
+                console.log(`Element ${i+1} opacity:`, computed.opacity);
+            });
+        }, 2000);
+    </script>
+</body>
+</html>

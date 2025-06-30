@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 }
 
 $page_title = "Login - DormMate";
-$body_class = "split-layout";
+$body_class = "auth-page login-page split-layout";
 include '../includes/header.php';
 ?>
 
