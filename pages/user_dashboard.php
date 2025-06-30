@@ -1,10 +1,11 @@
 <!--for checking if the user is logged in and has the correct role-->
 
 <?php
+ob_start(); // Start output buffering
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
-    header("Location: ../index.php");
+    header("Location: login.php");
     exit();
 }
 ?>
@@ -29,7 +30,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
     <a href="#">📝 Make Reservation</a>
     <a href="#">📂 Manage Bookings</a>
     <a href="about.php">ℹ️ About Us</a>
-    <a href="#">🚪 Logout</a>
+    <a href="logout.php" onclick="return confirmLogout()">🚪 Logout</a>
 </div>
 </div>
 
@@ -54,7 +55,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
 <!-- Scrollable Unit Cards -->
 <div class="unit-container">
 <?php
-include 'DBConnector.php';
+include '../config/DBConnector.php';
 
 $sql = "SELECT * FROM units";
 $result = $conn->query($sql);
@@ -134,6 +135,11 @@ $conn->close();
         showAvailableOnly.checked = false;
         updateUnits();
     });
+    
+    // Logout confirmation
+    function confirmLogout() {
+        return confirm('Are you sure you want to logout?');
+    }
 </script>
 
 
