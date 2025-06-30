@@ -305,3 +305,38 @@ body.auth-page.signup-page .toggle-form {
     opacity: 0;
     animation: simpleFadeIn 0.5s ease-out 1.3s both;
 }
+
+.admin-badge {
+    background: linear-gradient(45deg, #dc3545, #ffc107);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+    animation: pulse 2s infinite;
+}
+        
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}
+        
+
+.user-badge {
+    background: linear-gradient(45deg, #35dc46, #076aff);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+    animation: userPulse 2s infinite;
+}
+        
+@keyframes userPulse {
+    0% { box-shadow: 0 0 0 0 rgba(53, 220, 70, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(53, 220, 70, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(53, 220, 70, 0); }
+}
