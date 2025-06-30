@@ -50,8 +50,10 @@ body.dashboard {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Button base style */
-.btn {
+/* Button base style - only for dashboard pages */
+.dashboard-page .btn,
+.user-dashboard .btn,
+.admin-dashboard .btn {
     display: inline-block;
     padding: 8px 16px;
     background-color: transparent;
@@ -65,7 +67,9 @@ body.dashboard {
     transition: color 0.3s ease;
 }
 
-.btn:hover {
+.dashboard-page .btn:hover,
+.user-dashboard .btn:hover,
+.admin-dashboard .btn:hover {
     color: #ffffff;
     text-decoration: none;
 }
