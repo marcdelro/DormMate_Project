@@ -79,6 +79,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.body.classList.contains('login-page')) {
         console.log('Login page detected - initializing animations');
         
+        // Ensure button is visible after animation delay
+        setTimeout(() => {
+            const button = document.querySelector('button[name="login"]');
+            if (button) {
+                button.style.opacity = '1';
+                console.log('Button visibility ensured');
+            }
+        }, 2000);
+        
         // Add interactive hover effects to form fields
         const formGroups = document.querySelectorAll('.form-group');
         formGroups.forEach((group) => {
@@ -114,6 +123,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Signup page animations
     if (document.body.classList.contains('signup-page')) {
         console.log('Signup page detected - initializing animations');
+        
+        // Ensure button is visible after animation delay
+        setTimeout(() => {
+            const button = document.querySelector('button[name="signup"]');
+            if (button) {
+                button.style.opacity = '1';
+                console.log('Signup button visibility ensured');
+            }
+        }, 1500);
         
         const container = document.querySelector('.container');
         console.log('Container found:', !!container);
