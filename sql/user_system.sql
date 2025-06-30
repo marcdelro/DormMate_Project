@@ -45,7 +45,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `middle_name`, `email`, `contact_number`, `password`, `role`, `created_at`, `birthday`) VALUES
-(2, 'Patricia Therese', 'Damaso', 'Pagayoya', 'damasopatricia12@gmail.com', '09199559795', '$2y$10$CglYNCkA4QPjYk0ocyQu2usWBj.K0fzRJyHl6dEPxqF4hehXrSxcO', 'user', '2025-06-29 09:14:38', '2004-12-10');
+(2, 'Patricia Therese', 'Damaso', 'Pagayoya', 'damasopatricia12@gmail.com', '09199559795', '$2y$10$CglYNCkA4QPjYk0ocyQu2usWBj.K0fzRJyHl6dEPxqF4hehXrSxcO', 'user', '2025-06-29 09:14:38', '2004-12-10'),
+(3, 'Marc', 'Del Rosario', 'Rubio', 'onlymrcdelro@gmail.com', '09270441819', '$2y$10$/tHPbqtlNhXxfYAjdGtW.u4KUfs/4Wn/QuWoX4jKXononA.p8x0Ym', 'user', '2025-06-29 18:21:04', '2004-07-04');
 
 --
 -- Indexes for dumped tables
