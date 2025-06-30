@@ -110,7 +110,9 @@ include '../includes/header.php';
                     <button type="submit" name="login" class="btn">Sign In</button>
                 </form>
                 
+                    
                 <div class="toggle-form">
+                    <a href="forgot_password.php">Forgot Password?</a><br/>
                     Don't have an account? <a href="signup.php">Create Account</a>
                 </div>
             </div>
