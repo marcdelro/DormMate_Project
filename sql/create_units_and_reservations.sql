@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS reservations (
     user_id INT NOT NULL,
     unit_id INT NOT NULL,
     valid_id_path VARCHAR(255),
-    reservation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50) DEFAULT 'Pending',
+    reservation_time_and_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (unit_id) REFERENCES units(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
