@@ -16,9 +16,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <!-- Link main CSS -->
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/Dashboard.css">
 </head>
 <body>
 
