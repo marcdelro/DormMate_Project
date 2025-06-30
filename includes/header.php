@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="../assets/css/split_layout.css">
     <link rel="stylesheet" href="../assets/css/forms.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
-    <link rel="stylesheet" href="../assets/css/auth-branding.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
     <link rel="stylesheet" href="../assets/css/signup.css">
+    <link rel="stylesheet" href="../assets/css/forgot_password.css">
     <link rel="stylesheet" href="../assets/css/messages.css">
     <link rel="stylesheet" href="../assets/css/animations.css">
     <link rel="stylesheet" href="../assets/css/responsiveness.css">
     <script src="../assets/js/main.js" defer></script>
 </head>
-<body class="<?php echo isset($body_class) ? $body_class : ''; ?>"></body>
+<body class="<?php echo isset($body_class) ? $body_class : ''; ?>">
+    

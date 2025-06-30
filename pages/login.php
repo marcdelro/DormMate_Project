@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 }
 
 $page_title = "Login - DormMate";
-$body_class = "split-layout";
+$body_class = "auth-page login-page split-layout";
 include '../includes/header.php';
 ?>
 
@@ -110,7 +110,9 @@ include '../includes/header.php';
                     <button type="submit" name="login" class="btn">Sign In</button>
                 </form>
                 
+                    
                 <div class="toggle-form">
+                    <a href="forgot_password.php">Forgot Password?</a><br/>
                     Don't have an account? <a href="signup.php">Create Account</a>
                 </div>
             </div>
