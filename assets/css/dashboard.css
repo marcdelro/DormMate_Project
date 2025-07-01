@@ -145,12 +145,13 @@ body.dashboard.admin-dashboard {
     margin-top: 20px;
     padding: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, 350px);
     gap: 20px;
     animation: fadeInUp 0.8s ease-out 0.4s both;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    justify-content: center;
 }
 
 /* Unit Cards */
@@ -808,9 +809,10 @@ body.dashboard.admin-dashboard {
     }
     
     .unit-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         padding: 15px;
         gap: 15px;
+        justify-content: center;
     }
     
     .unit-card {
@@ -824,6 +826,7 @@ body.dashboard.admin-dashboard {
         padding: 15px 10px;
         gap: 15px;
         grid-template-columns: 1fr;
+        justify-content: center;
     }
     
     .unit-card {
