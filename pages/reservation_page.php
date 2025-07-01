@@ -3,6 +3,7 @@ include __DIR__ . '/../config/units_database.php';
 session_start();
 
 $unitsCount = isset($units) && is_array($units) ? count($units) : 0;
+$preselectedUnitId = isset($_GET['unit_id']) ? $_GET['unit_id'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -167,6 +168,7 @@ echo "</div>";
     const unitCards = document.querySelectorAll('.unit-card:not(.reserved)');
     const selectedUnitInput = document.getElementById('selected-unit');
     const confirmBtn = document.getElementById('confirm-btn');
+    const preselectedUnitId = "<?php echo htmlspecialchars($preselectedUnitId); ?>";
 
     unitCards.forEach(card => {
         card.addEventListener('click', () => {
@@ -202,6 +204,18 @@ echo "</div>";
             console.log('Form submitted with unit:', selectedUnitInput.value);
         });
     }
+
+    // Preselects an option if a "unit_id" is obtained using the "get" method
+    if (preselectedUnitId) {
+    unitCards.forEach(card => {
+        if (card.getAttribute('data-unit-id') === preselectedUnitId) {
+            card.classList.add('selected');
+            selectedUnitInput.value = preselectedUnitId;
+            confirmBtn.disabled = false;
+            console.log('Auto-selected unit from URL:', preselectedUnitId);
+        }
+    });
+}
 </script>
 
 </body>
