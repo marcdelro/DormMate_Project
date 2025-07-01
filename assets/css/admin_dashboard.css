@@ -375,13 +375,19 @@ body.dashboard.admin-dashboard {
 
 /* Admin badge gets golden pulse */
 .admin-badge {
-    animation: pulse-admin 2s infinite;
+    animation: adminBadgePulse 2s infinite;
 }
 
-@keyframes pulse-admin {
-    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+@keyframes adminBadgePulse {
+    0% { 
+        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3), 0 0 0 0 rgba(255, 215, 0, 0.7);
+    }
+    70% { 
+        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3), 0 0 0 10px rgba(255, 215, 0, 0);
+    }
+    100% { 
+        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3), 0 0 0 0 rgba(255, 215, 0, 0);
+    }
 }
 
 .role-badge {

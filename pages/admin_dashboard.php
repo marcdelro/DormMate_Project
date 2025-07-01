@@ -222,52 +222,6 @@ try {
             background: #28a745;
             color: white;
         }
-        
-        .quick-actions {
-            margin-top: 30px;
-            text-align: center;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .quick-actions h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .quick-action-btn {
-            background: #2c3e50;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 8px;
-            margin: 0 10px;
-            display: inline-block;
-            transition: background 0.3s ease;
-            font-weight: 500;
-        }
-        
-        .quick-action-btn:hover {
-            background: #34495e;
-        }
-        
-        .quick-action-btn.success {
-            background: #28a745;
-        }
-        
-        .quick-action-btn.success:hover {
-            background: #218838;
-        }
-        
-        .quick-action-btn.secondary {
-            background: #6c757d;
-        }
-        
-        .quick-action-btn.secondary:hover {
-            background: #545b62;
-        }
     </style>
 </head>
 <body class="dashboard admin-dashboard">
@@ -282,7 +236,8 @@ try {
         <div class="nav-links">
             <a href="admin_dashboard.php" class="nav-link active">Dashboard</a>
             <a href="../create_admin.php" class="nav-link">Users</a>
-            <a href="reservation_page.php" class="nav-link">Units</a>
+            <a href="units.php" class="nav-link">Units</a>
+            <a href="manage_reservations.php" class="nav-link">Reservations</a>
             <a href="#" class="nav-link">Reports</a>
         </div>
     </div>
@@ -321,44 +276,6 @@ try {
             </div>
         </div>
 
-        <!-- Current Users in System -->
-        <div class="current-users-section">
-            <h3>👥 All Users in System (<?php echo count($allUsers); ?> total)</h3>
-            <div class="users-list">
-                <div class="users-list-header">
-                    <div class="col-status">Status</div>
-                    <div class="col-name">Name</div>
-                    <div class="col-email">Email</div>
-                    <div class="col-role">Role</div>
-                    <div class="col-joined">Joined</div>
-                </div>
-                <?php foreach ($allUsers as $user): ?>
-                    <div class="user-row <?php echo $user['role']; ?> <?php echo ($user['id'] == $_SESSION['user_id']) ? 'current-user' : ''; ?>">
-                        <div class="col-status">
-                            <div class="status-indicator <?php echo ($user['id'] == $_SESSION['user_id']) ? 'online' : 'offline'; ?>"></div>
-                        </div>
-                        <div class="col-name">
-                            <?php echo $user['role_icon']; ?> <?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?>
-                            <?php if ($user['id'] == $_SESSION['user_id']): ?>
-                                <span class="you-badge">YOU</span>
-                            <?php endif; ?>
-                        </div>
-                        <div class="col-email">
-                            <?php echo htmlspecialchars($user['email']); ?>
-                        </div>
-                        <div class="col-role">
-                            <span class="role-badge <?php echo $user['role']; ?>">
-                                <?php echo strtoupper($user['role']); ?>
-                            </span>
-                        </div>
-                        <div class="col-joined">
-                            <?php echo date('M j, Y', strtotime($user['created_at'])); ?>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
         <!-- Recent Users -->
         <div class="recent-users">
             <h3>📋 Recent User Registrations</h3>
@@ -385,23 +302,6 @@ try {
                 <p style="text-align: center; color: #666; padding: 20px;">No users found in the system.</p>
             <?php endif; ?>
         </div>
-
-        <!-- Quick Actions -->
-        <div class="quick-actions">
-            <h3>⚡ Quick Actions</h3>
-            <a href="../create_admin.php" class="quick-action-btn">
-                👤 Create Admin User
-            </a>
-            <a href="user_dashboard.php" class="quick-action-btn">
-                👁️ View as User
-            </a>
-            <a href="reservation_page.php" class="quick-action-btn">
-                🏠 Manage Units
-            </a>
-            <a href="#" class="quick-action-btn" onclick="refreshStats()">
-                🔄 Refresh Stats
-            </a>
-        </div>
     </div>
 
     <script>
@@ -412,7 +312,7 @@ try {
         function refreshStats() {
             // Show loading animation
             document.querySelectorAll('.live-stat').forEach(card => {
-                card.style.animation = 'pulse 1s ease-in-out infinite';
+                card.style.animation = 'statCardPulse 1s ease-in-out infinite';
             });
             
             // Simulate refresh (in real app, make AJAX call)
@@ -436,7 +336,7 @@ try {
             
             // Add pulse animation to live stats
             document.querySelectorAll('.live-stat').forEach(card => {
-                card.style.animation = 'pulse 0.5s ease-in-out';
+                card.style.animation = 'statCardPulse 0.5s ease-in-out';
                 setTimeout(() => {
                     card.style.animation = '';
                 }, 500);
@@ -446,7 +346,7 @@ try {
         // Auto-refresh system stats every 30 seconds
         setInterval(updateSystemStats, 30000);
         
-        // Add smooth transitions to stat cards and user rows
+        // Add smooth transitions to stat cards
         document.addEventListener('DOMContentLoaded', function() {
             // Fix scrolling issue
             document.body.style.overflow = 'auto';
@@ -454,7 +354,6 @@ try {
             document.documentElement.style.overflow = 'auto';
             
             const statCards = document.querySelectorAll('.stat-card');
-            const userRows = document.querySelectorAll('.user-row');
             
             statCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
@@ -465,12 +364,6 @@ try {
                 });
             });
             
-            // Add staggered animation to user rows
-            userRows.forEach((row, index) => {
-                row.style.animationDelay = `${index * 0.1}s`;
-                row.classList.add('fade-in');
-            });
-            
             // Initial stats update
             updateSystemStats();
         });
@@ -478,7 +371,7 @@ try {
         // Add CSS animations
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes pulse {
+            @keyframes statCardPulse {
                 0% { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
                 50% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3); }
                 100% { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
