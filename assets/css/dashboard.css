@@ -145,103 +145,160 @@ body.dashboard.admin-dashboard {
     margin-top: 20px;
     padding: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     animation: fadeInUp 0.8s ease-out 0.4s both;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Unit Cards */
 .unit-card {
-    background-color: #e3f1f3;
-    border-left: 8px solid #ccc;
-    border-radius: 12px;
-    padding: 16px 20px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+    cursor: pointer;
     width: 100%;
 }
 
-
 .unit-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
+    border-color: #2980b9 !important;
+    box-shadow: 0 8px 25px rgba(41, 128, 185, 0.4) !important;
+    transform: translateY(-8px) scale(1.05) !important;
+    background: #f8f9ff !important;
 }
 
 .unit-card.available {
-    border-left-color: #66d2ea;
+    border-color: #ddd;
+}
+
+.unit-card.available:hover {
+    border-color: #27ae60;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+    transform: translateY(-8px) scale(1.05);
 }
 
 .unit-card.occupied {
-    border-left-color: #e74c3c;
+    border-color: #e74c3c;
+    opacity: 0.8;
+}
+
+.unit-card.occupied:hover {
+    border-color: #c0392b;
+    box-shadow: 0 8px 25px rgba(192, 57, 43, 0.4);
+    transform: translateY(-6px) scale(1.03);
 }
 
 .unit-image {
     width: 100%;
     height: 180px;
-    border-radius: 10px;
     object-fit: cover;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
 }
 
 .unit-details {
-    text-align: center;
+    padding: 0 15px 15px 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .unit-details h2 {
-    margin: 0 0 6px;
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-weight: 700;
     font-size: 20px;
-    color: #0f2c48;
 }
 
 .unit-details p {
     margin: 4px 0;
+    color: #555;
     font-size: 14px;
-    color: #333;
+    flex-grow: 0;
+}
+
+.unit-details .price {
+    font-weight: 700;
+    color: #2980b9;
+    margin-bottom: 6px;
+}
+
+.unit-details .size {
+    color: #555;
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+.unit-details .description {
+    color: #555;
+    font-size: 14px;
+    margin: 4px 0 8px 0;
+    line-height: 1.4;
 }
 
 .status {
-    font-weight: bold;
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 5px;
-    font-size: 13px;
+    margin-top: auto;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
     margin-bottom: 8px;
-    color: white;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .available .status {
-    background-color: #66d2ea;
+    background-color: #d4edda;
+    color: #27ae60;
+    border: 1px solid #c3e6cb;
 }
 
 .occupied .status {
-    background-color: #e74c3c;
+    background-color: #f8d7da;
+    color: #c0392b;
+    border: 1px solid #f5c6cb;
 }
 
 .reserve-btn {
-    padding: 10px 20px;
+    width: 100%;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
     cursor: pointer;
-    background-color: #0f2c48;
+    background-color: #2980b9;
     color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
     margin-top: 10px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
 .reserve-btn:hover {
-    background-color: #e0c810;
-    color: #0f2c48;
+    background-color: #1a5276;
+    transform: translateY(-2px);
 }
 
 .reserve-btn[disabled] {
-    background-color: #aaa;
-    color: #eee;
+    background-color: #95a5a6;
+    color: white;
     cursor: not-allowed;
+    transform: none;
+}
+
+.reserve-btn[disabled]:hover {
+    background-color: #95a5a6;
+    transform: none;
 }
 
 .unit-controls {
@@ -761,6 +818,33 @@ body.dashboard.admin-dashboard {
     }
 }
 
+@media (max-width: 599px) {
+    /* Mobile adjustments for unit cards to match reservation page */
+    .unit-container {
+        padding: 15px 10px;
+        gap: 15px;
+        grid-template-columns: 1fr;
+    }
+    
+    .unit-card {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .unit-image {
+        height: 160px;
+    }
+    
+    .unit-details {
+        padding: 0 12px 12px 12px;
+    }
+    
+    .reserve-btn {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}
+
 @media (max-width: 480px) {
     .top-navbar {
         height: 120px; /* Taller to accommodate wrapped content */
@@ -884,6 +968,23 @@ body.dashboard.admin-dashboard {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/* Additional reservation-page-like hover effects */
+.unit-card:hover .unit-details h2 {
+    color: #2980b9;
+    transition: color 0.3s ease;
+}
+
+.unit-card:hover .unit-image {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+/* Smooth transitions for all elements */
+.unit-details h2,
+.unit-image {
+    transition: all 0.3s ease;
 }
 
 /* Staggered animation for unit cards */

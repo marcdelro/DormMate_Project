@@ -91,10 +91,10 @@ try {
              onerror="this.src='../assets/images/placeholder.jpg'">
         <div class="unit-details">
             <h2><?= htmlspecialchars($row['unit_type']) ?></h2>
+            <p class="price"><strong>Price:</strong> ₱<?= number_format($row['price'], 2) ?></p>
+            <p class="size"><strong>Size:</strong> <?= htmlspecialchars($row['size']) ?> sqm</p>
+            <p class="description"><?= htmlspecialchars($row['description']) ?></p>
             <span class="status"><?= $statusText ?></span>
-            <p><strong>Price:</strong> ₱<?= number_format($row['price'], 2) ?></p>
-            <p><strong>Size:</strong> <?= htmlspecialchars($row['size']) ?> sqm</p>
-            <p><?= htmlspecialchars($row['description']) ?></p>
             <?php if (!$isReserved): ?>
                 <a href="UnitDetails.php?id=<?= $row['id'] ?>">
                     <button class="reserve-btn">View Details</button>
