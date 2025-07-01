@@ -1,5 +1,5 @@
 <?php
-include 'DBConnector.php';
+include '../config/DBConnector.php';
 
 $unit_id = $_GET['id'] ?? null;
 
@@ -27,7 +27,11 @@ $unit = $result->fetch_assoc();
 <head>
     <title><?= htmlspecialchars($unit['unit_type']) ?> - DormMate</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Units_Details.css"> <!-- Linked external CSS -->
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/Units_Details.css">
 </head>
 <body>
 <!-- Top bar -->
@@ -35,12 +39,12 @@ $unit = $result->fetch_assoc();
 
 <!-- Breadcrumb -->
 <div class="breadcrumbs">
-    <a href="ViewUnits.php">🏠 Home</a> &gt; Room Details
+    <a href="user_dashboard.php">🏠 Dashboard</a> &gt; Room Details
 </div>
 
 <!-- Detail card -->
 <div class="detail-container">
-    <img src="<?= htmlspecialchars($unit['photo_path']) ?>" alt="Room Image" class="detail-image">
+    <img src="../<?= htmlspecialchars($unit['photo_path']) ?>" alt="Room Image" class="detail-image">
 
     <div class="detail-info">
         <h2><?= htmlspecialchars($unit['unit_type']) ?></h2>
@@ -54,11 +58,13 @@ $unit = $result->fetch_assoc();
 
         <div class="detail-buttons">
             <?php if (!$unit['is_reserved']): ?>
-                <button class="btn btn-primary">Reserve Now</button>
+                <a href="reservation_page.php?unit_id=<?= $unit['id'] ?>">
+                    <button class="btn btn-primary">Reserve Now</button>
+                </a>
             <?php else: ?>
                 <button class="btn btn-primary" disabled>Already Reserved</button>
             <?php endif; ?>
-            <a href="ViewUnits.php"><button class="btn btn-secondary">Back</button></a>
+            <a href="user_dashboard.php"><button class="btn btn-secondary">Back to Dashboard</button></a>
         </div>
     </div>
 </div>
