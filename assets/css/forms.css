@@ -76,15 +76,19 @@ form .btn,
 .auth-form-section .btn,
 .auth-form-wrapper .btn,
 .form-container .btn,
-html body .auth-page .btn {
+html body .auth-page .btn,
+.auth-container .btn,
+.auth-form-section button,
+.form-container button[type="submit"] {
     width: 100% !important;
-    padding: 14px !important;
-    background-color: #2c3e50 !important;
+    padding: 15px 30px !important;
+    background: linear-gradient(45deg, #026cff, #004be2) !important;
+    background-color: #4299e1 !important; /* Fallback for older browsers */
     color: white !important;
     border: none !important; 
     border-radius: 8px !important;
-    font-size: 16px !important;
-    font-weight: 500 !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
     cursor: pointer !important;
     transition: all 0.3s ease !important;
     margin-top: 10px !important;
@@ -96,6 +100,10 @@ html body .auth-page .btn {
     appearance: none !important;
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    min-width: 160px !important;
+    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4) !important;
 }
 
 .btn:hover,
@@ -106,12 +114,16 @@ form .btn:hover,
 .auth-form-section .btn:hover,
 .auth-form-wrapper .btn:hover,
 .form-container .btn:hover,
-html body .auth-page .btn:hover {
-    background-color: #e0c810 !important;
+html body .auth-page .btn:hover,
+.auth-container .btn:hover,
+.auth-form-section button:hover,
+.form-container button[type="submit"]:hover {
+    background: linear-gradient(45deg, #e4e010, #e1a203) !important;
+    background-color: #3182ce !important; /* Fallback */
     color: #fff !important;
     border-radius: 8px !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 20px rgba(255, 242, 0, 0.9) !important;
     text-decoration: none !important;
 }
 
@@ -123,8 +135,13 @@ form .btn:active,
 .auth-form-section .btn:active,
 .auth-form-wrapper .btn:active,
 .form-container .btn:active,
-html body .auth-page .btn:active {
-    transform: translateY(0) !important;
+html body .auth-page .btn:active,
+.auth-container .btn:active,
+.auth-form-section button:active,
+.form-container button[type="submit"]:active {
+    background: linear-gradient(45deg, #2c5282, #2a4365) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4) !important;
     text-decoration: none !important;
 }
 

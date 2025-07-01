@@ -303,6 +303,43 @@ try {
             <?php endif; ?>
         </div>
     </div>
+    
+    <!-- Admin Footer -->
+    <footer class="admin-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>DormMate Admin</h4>
+                <p>Administrative control panel for managing dormitory units, users, and system operations.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Admin Tools</h4>
+                <ul>
+                    <li><a href="#" onclick="refreshStats()">Refresh Statistics</a></li>
+                    <li><a href="#" onclick="location.reload()">Reload Dashboard</a></li>
+                    <li><a href="logout.php">Secure Logout</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>System Info</h4>
+                <p>
+                    <a href="https://github.com/search?q=DormMate&type=repositories" target="_blank" rel="noopener noreferrer" class="github-link">
+                        <span class="github-icon">👨‍💻</span> Source Code
+                    </a>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Project Details</h4>
+                <p class="footer-info">
+                    Admin Panel v1.0<br>
+                    Created: December 2024<br>
+                    PHP Admin Dashboard
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DormMate Admin Panel. Secure dormitory management system.</p>
+        </div>
+    </footer>
 
     <script>
         function confirmLogout() {

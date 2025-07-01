@@ -127,7 +127,7 @@
 
 /* ========== LOGIN PAGE BACKGROUND ========== */
 body.auth-page.login-page {
-    background: linear-gradient(-180deg, rgba(102, 210, 234, 0.9), #0f2c48, rgba(231, 235, 236, 0.9), rgba(7, 49, 59, 0.9)),
+    background: linear-gradient(-180deg, #66d2eae6, #0f2c48, rgba(45, 55, 72, 0.9), rgba(45, 55, 72, 0.9)),
        url('https://www.aurecongroup.com/-/media/images/aurecon/content/insights/tall-buildings-past-present/tall-buildings-past-present-hero-banner.jpg?as=0&w=824') center/cover;
     background-size: 200% 400% !important;
     animation: gradientShift 55s ease infinite !important;

@@ -14,10 +14,10 @@ CREATE TABLE IF NOT EXISTS units (
 );
 
 INSERT INTO `units` (`id`, `unit_type`, `price`, `is_reserved`, `description`, `photo_path`, `size`) VALUES
-(1, 'Single Room', 5000.00, 1, 'Cozy room with private bathroom', 'images/Dr1.jpg', '40'),
-(2, 'Double Room', 3500.00, 0, 'Shared room with two beds and common bath', 'images/Dr2.jpg', '70'),
-(3, 'Studio Unit', 7300.00, 0, 'Studio type with kitchenette and own bath', 'images/Dr3.jpg', '100'),
-(4, 'Single Room', 4000.00, 0, 'Simple unfurnished room', 'images/Dr4.jpg', '30');
+(1, 'Single Room', 5000.00, 1, 'Cozy room with private bathroom', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop&q=80', '40'),
+(2, 'Double Room', 3500.00, 0, 'Shared room with two beds and common bath', 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&q=80', '70'),
+(3, 'Studio Unit', 7300.00, 0, 'Studio type with kitchenette and own bath', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop&q=80', '100'),
+(4, 'Single Room', 4000.00, 0, 'Simple unfurnished room', 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&q=80', '30');
 
 CREATE TABLE IF NOT EXISTS reservations (
     id INT AUTO_INCREMENT PRIMARY KEY,
