@@ -47,20 +47,22 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
 </div>
 
 
-<div class="unit-controls">
-    <h3>🔍 Find Your Perfect Room</h3>
-    <select id="filterType">
-        <option value="all">All Types</option>
-        <option value="Single Room">Single Room</option>
-        <option value="Double Room">Double Room</option>
-        <option value="Studio Unit">Studio Unit</option>
-    </select>
-    <label class="available-toggle">
-        <input type="checkbox" id="showAvailableOnly">
-        Show Available Only
-    </label>
-    <button id="resetFilters">🔄 Reset Filters</button>
-</div>
+<!-- Main Content Container -->
+<div class="main-content">
+    <div class="unit-controls">
+        <h3>🔍 Find Your Perfect Room</h3>
+        <select id="filterType">
+            <option value="all">All Types</option>
+            <option value="Single Room">Single Room</option>
+            <option value="Double Room">Double Room</option>
+            <option value="Studio Unit">Studio Unit</option>
+        </select>
+        <label class="available-toggle">
+            <input type="checkbox" id="showAvailableOnly">
+            Show Available Only
+        </label>
+        <button id="resetFilters">🔄 Reset Filters</button>
+    </div>
 
 
 
@@ -124,6 +126,7 @@ try {
 }
 ?>
 </div> <!-- end unit-container -->
+</div> <!-- end main-content -->
 
 <script>
     const filterType = document.getElementById('filterType');
