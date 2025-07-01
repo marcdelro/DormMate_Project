@@ -17,12 +17,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 'user') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <!-- Link main CSS -->
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard_copy.css" id="theme-stylesheet">
     <link rel="stylesheet" href="../assets/css/animations.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- Theme Toggle Button -->
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode">
+    <span class="toggle-icon light-icon">D</span>
+    <div class="toggle-slider">🌙</div>
+    <span class="toggle-icon dark-icon">L</span>
+</button>
 
 <!-- Navigation Bar -->
 <div class="top-navbar">
@@ -359,6 +366,7 @@ try {
         organizeUnits();
         setupHorizontalScroll();
         animateHeroBackground();
+        initializeThemeToggle();
         
         // Add scroll effects
         window.addEventListener('scroll', () => {
@@ -369,6 +377,48 @@ try {
             }
         });
     });
+    
+    // Theme Toggle Functionality
+    function initializeThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        const themeStylesheet = document.getElementById('theme-stylesheet');
+        
+        // Check for saved theme preference or default to light mode
+        const savedTheme = localStorage.getItem('dashboardTheme') || 'light';
+        applyTheme(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = themeStylesheet.getAttribute('href').includes('dashboard_copy.css') ? 'light' : 'dark';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            applyTheme(newTheme);
+            localStorage.setItem('dashboardTheme', newTheme);
+            
+            // Add a nice click animation
+            themeToggle.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 150);
+        });
+    }
+    
+    function applyTheme(theme) {
+        const themeToggle = document.getElementById('themeToggle');
+        const themeStylesheet = document.getElementById('theme-stylesheet');
+        const toggleSlider = themeToggle.querySelector('.toggle-slider');
+        
+        if (theme === 'dark') {
+            themeStylesheet.setAttribute('href', '../assets/css/dashboard.css');
+            themeToggle.classList.add('dark-mode');
+            toggleSlider.innerHTML = '🌙';
+            themeToggle.title = 'Switch to Light Mode';
+        } else {
+            themeStylesheet.setAttribute('href', '../assets/css/dashboard_copy.css');
+            themeToggle.classList.remove('dark-mode');
+            toggleSlider.innerHTML = '☀️';
+            themeToggle.title = 'Switch to Dark Mode';
+        }
+    }
     
     // Expose functions globally
     window.scrollToSection = scrollToSection;
