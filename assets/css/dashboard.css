@@ -27,7 +27,7 @@ body.dashboard.admin-dashboard {
     left: 0;
     right: 0;
     height: 100px;
-    background: linear-gradient(135deg, #0f2c48 0%, #1e3a5f 100%);
+    background: linear-gradient(-125deg, #07313b 0%, #0f2c48 100%);
     color: white;
     display: flex;
     align-items: center;
